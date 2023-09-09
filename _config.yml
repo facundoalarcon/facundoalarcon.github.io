@@ -1,0 +1,30 @@
+title: Blog
+author:
+  name: Facundo Alarcón
+  email: facundoalarcon93@gmail.com
+
+# The `>` after `description:` means to ignore line-breaks until next key.
+# If you want to omit the line-break after the end of text, use `>-` instead.
+description: >
+  Tech Blog
+
+google_analytics: G-GSCL8X05TT
+
+
+remote_theme: jekyll/minima
+
+minima:
+  skin: classic
+  social_links:
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/facundo-alarcon" }
+    - { platform: github,   user_url: "https://github.com/facundoalarcon" }
+    - { platform: twitter,  user_url: "https://twitter.com/facualarcon_" }
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-remote-theme    
+
+header_pages:
+- resume.md
+- about.md

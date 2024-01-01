@@ -29,8 +29,6 @@ To show the subtitles of this video in English (for example), you can follow the
 3. Click again on the settings icon and select Subtitles and then Auto-translate. Choose English as the target language and wait for the translated subtitles to load.
 
 
-<img src="https://github.com/facundoalarcon/facundoalarcon.github.io/blob/main/assets/images/subtitles.gif" alt="Image">
-
-![subs](/assets/images/subtitles.gif)
+<img src="https://github.com/facundoalarcon/facundoalarcon.github.io/blob/main/assets/images/subtitles.gif" alt="Image" width="400" >
 
 

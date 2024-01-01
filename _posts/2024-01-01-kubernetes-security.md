@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kubernetes Security"
+title:  "Rocking Kubernetes Security: Safeguarding Hundreds of Clusters in a Dynamic Multi-Cloud Environment"
 date:   2024-01-01 16:55:00 -0300
 categories: kubernetes security aws gcp argocd kubescape gatekeeper
 youtubeID1: "umMyNpKBAWI"
@@ -18,6 +18,9 @@ KISS (Kubernetes Infraestructure Security Standard) emerges as an idea to secure
 ### DevSecOp Space
 {% include youtubePlayer.html id=youtubeID2 %}
 
+### Repo
+This is the [lab link](https://github.com/facundoalarcon/kubernetes-security).
+
 ### How to put subtitles in your language
 To show the subtitles of this video in English (for example), you can follow these steps:
 
@@ -25,6 +28,6 @@ To show the subtitles of this video in English (for example), you can follow the
 2. Select Subtitles and then Spanish (auto-generated). 
 3. Click again on the settings icon and select Subtitles and then Auto-translate. Choose English as the target language and wait for the translated subtitles to load.
 
-![subs](../assets/images/subtitles.gif)
+![subs](https://github.com/facundoalarcon/facundoalarcon.github.io/blob/main/assets/images/subtitles.gif)
 
 

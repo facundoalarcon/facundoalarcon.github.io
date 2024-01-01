@@ -29,10 +29,12 @@ Communication, Creativity, Problem-Solving, Leadership.
 
 **Cyber Security Analyst (Dec 2020 - Feb 2022)**
 
-As a Cibersecurity team menber, I build software to secure the MercadoLibre's cloud infrastructure automating security controls in different cloud providers and borders.
+As a Cibersecurity team member, I build software to secure the MercadoLibre's cloud infrastructure automating security controls in different cloud providers and borders.
 
 Talks:
 - We talked about [FISK](https://www.youtube.com/watch?v=QO8jLPkX1Io) in the DevSecOps Space of the [@EkoParty](https://ekoparty.org/) cybersecurity conference!
+- I talk about KISS in the [Blue](https://www.youtube.com/watch?v=umMyNpKBAWI) and the [DevsecOps](https://www.youtube.com/watch?v=a32faMwkSAQ) spaces.
+- I talked about this in the kiss talks, but [here](https://github.com/facundoalarcon/kubernetes-security) I leave the lab (my repository has more than one experiment).
 
 ## UTN FRRe
 

@@ -33,7 +33,7 @@ As a Cibersecurity team member, I build software to secure the MercadoLibre's cl
 
 Talks:
 - We talked about [FISK](https://www.youtube.com/watch?v=QO8jLPkX1Io) in the DevSecOps Space of the [@EkoParty](https://ekoparty.org/) cybersecurity conference!
-- I talk about KISS in the [Blue](https://www.youtube.com/watch?v=umMyNpKBAWI) and the [DevsecOps](https://www.youtube.com/watch?v=a32faMwkSAQ) spaces.
+- I talk about **KISS** our Kubernetes security Project in the [Blue](https://www.youtube.com/watch?v=umMyNpKBAWI) and the [DevsecOps](https://www.youtube.com/watch?v=a32faMwkSAQ) spaces.
 - I talked about this in the kiss talks, but [here](https://github.com/facundoalarcon/kubernetes-security) I leave the lab (my repository has more than one experiment).
 
 ## UTN FRRe

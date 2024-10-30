@@ -1,8 +1,12 @@
+// src/components/FileUpload.tsx
+
 import React, { useState } from 'react';
+import { useAuth } from './Auth/AuthProvider';
 
 const FileUpload: React.FC = () => {
+  const { user, logout } = useAuth(); // Obtén el usuario y la función de logout del contexto
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState(false);  // Estado de carga
+  const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +22,7 @@ const FileUpload: React.FC = () => {
     }
 
     setError(null);
-    setIsUploading(true);  // Inicia la carga
+    setIsUploading(true);
 
     const formData = new FormData();
     formData.append('file', selectedFile);
@@ -40,11 +44,10 @@ const FileUpload: React.FC = () => {
       a.download = `${selectedFile.name.replace('.pdf', '')}.csv`;
       a.click();
       window.URL.revokeObjectURL(url);
-
     } catch (error) {
       setError('Error uploading the file');
     } finally {
-      setIsUploading(false);  // Termina la carga
+      setIsUploading(false);
     }
   };
 
@@ -52,19 +55,22 @@ const FileUpload: React.FC = () => {
     <div>
       <h2>Upload PDF and Convert to CSV</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
       <form onSubmit={handleSubmit}>
-        <input type="file" accept=".pdf" onChange={handleFileChange} />
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          style={{ marginTop: '20px' }}
+        />
         <button type="submit" disabled={!selectedFile || isUploading}>
           Upload and Process
         </button>
       </form>
 
-      {/* Mostrar el spinner mientras está subiendo */}
       {isUploading && (
         <div style={{ marginTop: '20px' }}>
           <img
-            src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"  // Un logo o spinner, lo puedes reemplazar con lo que quieras
+            src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
             alt="Processing..."
             style={{ width: '70px'}}
           />

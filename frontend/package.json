@@ -23,7 +23,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build && cp -R build/* ../contable/",
+    "build": "react-scripts build && cp -R build/* ../contable/ && rm -rf ./build",
     "build2": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

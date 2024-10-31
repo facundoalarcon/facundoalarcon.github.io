@@ -39,7 +39,7 @@ const FileUpload: React.FC = () => {
       if (!uploadUrl) {
         throw new Error("La URL de subida no está definida en las variables de entorno");
       }
-      console.log(uploadUrl)
+      console.log(uploadUrl) // Si hay error en subir archivos no esta cargando la url se puede poner acá
       const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,

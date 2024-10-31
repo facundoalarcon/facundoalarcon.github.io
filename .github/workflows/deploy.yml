@@ -25,6 +25,7 @@ jobs:
       run: npm run build
       env:
         REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
+        FILE_URL_UPLOAD: ${{ secrets.FILE_URL_UPLOAD }}
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3

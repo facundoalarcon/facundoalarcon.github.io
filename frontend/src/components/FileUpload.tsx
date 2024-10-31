@@ -26,7 +26,12 @@ const FileUpload: React.FC = () => {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch('https://contable-eed6.onrender.com/upload', {
+      const uploadUrl = process.env.FILE_URL_UPLOAD;
+
+      if (!uploadUrl) {
+        throw new Error("La URL de subida no está definida en las variables de entorno");
+      }
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
       });

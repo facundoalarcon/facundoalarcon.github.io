@@ -1,6 +1,6 @@
 // src/components/Auth/AuthProvider.tsx
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { GoogleOAuthProvider, googleLogout } from '@react-oauth/google';
 
 interface AuthContextType {

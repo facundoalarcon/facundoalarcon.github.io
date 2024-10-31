@@ -1,10 +1,8 @@
-// src/components/FileUpload.tsx
-
 import React, { useState } from 'react';
 import { useAuth } from './Auth/AuthProvider';
 
 const FileUpload: React.FC = () => {
-  const { user, logout } = useAuth(); // Obtén el usuario y la función de logout del contexto
+  const { user } = useAuth();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +15,7 @@ const FileUpload: React.FC = () => {
     event.preventDefault();
 
     if (!selectedFile) {
-      setError('No file selected');
+      setError('Por favor, seleccione un archivo');
       return;
     }
 
@@ -34,7 +32,7 @@ const FileUpload: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Error during file upload');
+        throw new Error('Error en la subida del archivo');
       }
 
       const blob = await response.blob();
@@ -45,38 +43,22 @@ const FileUpload: React.FC = () => {
       a.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      setError('Error uploading the file');
+      setError('Hubo un problema al subir el archivo');
     } finally {
       setIsUploading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Upload PDF and Convert to CSV</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="container">
+      <h2>Subir y Convertir PDF a CSV</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={handleFileChange}
-          style={{ marginTop: '20px' }}
-        />
+        <input type="file" accept=".pdf" onChange={handleFileChange} />
         <button type="submit" disabled={!selectedFile || isUploading}>
-          Upload and Process
+          {isUploading ? 'Procesando...' : 'Subir y Procesar'}
         </button>
       </form>
-
-      {isUploading && (
-        <div style={{ marginTop: '20px' }}>
-          <img
-            src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"
-            alt="Processing..."
-            style={{ width: '70px'}}
-          />
-          <p>Processing file, please wait...</p>
-        </div>
-      )}
     </div>
   );
 };

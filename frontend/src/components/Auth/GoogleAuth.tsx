@@ -1,5 +1,3 @@
-// src/components/Auth/GoogleAuth.tsx
-
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from './AuthProvider';
@@ -9,7 +7,7 @@ const AuthComponent: React.FC = () => {
 
   const handleLoginSuccess = (credentialResponse: any) => {
     console.log('Login Success:', credentialResponse);
-    login(credentialResponse); // Llama a la función login del contexto
+    login(credentialResponse);
   };
 
   const handleLoginError = () => {
@@ -17,8 +15,8 @@ const AuthComponent: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Contable</h1>
+    <div className="container">
+      <h1>Login</h1>
       <GoogleLogin
         onSuccess={handleLoginSuccess}
         onError={handleLoginError}

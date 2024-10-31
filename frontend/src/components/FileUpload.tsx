@@ -34,7 +34,7 @@ const FileUpload: React.FC = () => {
     formData.append('file', selectedFile);
 
     try {
-      const uploadUrl = process.env.FILE_URL_UPLOAD;
+      const uploadUrl = process.env.REACT_APP_FILE_URL_UPLOAD;
 
       if (!uploadUrl) {
         throw new Error("La URL de subida no está definida en las variables de entorno");

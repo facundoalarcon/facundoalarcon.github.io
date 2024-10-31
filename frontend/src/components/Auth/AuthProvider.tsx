@@ -1,6 +1,6 @@
 // src/components/Auth/AuthProvider.tsx
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { GoogleOAuthProvider, googleLogout } from '@react-oauth/google';
 
 interface AuthContextType {
@@ -12,22 +12,27 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<any>(() => {
-    // Obtener usuario desde localStorage al cargar
+  const [user, setUser] = useState<any>(null);
+
+  // Restaurar el usuario desde localStorage al cargar el componente
+  useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const login = (credentialResponse: any) => {
+    console.log('Credential Response:', credentialResponse);
     if (credentialResponse && credentialResponse.credential) {
       const profile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
-      const newUser = {
+      const userData = {
         name: profile.name,
         email: profile.email,
         picture: profile.picture,
       };
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser)); // Guardar en localStorage
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData)); // Guardar en localStorage
     } else {
       console.error('No valid credential response');
     }
@@ -35,8 +40,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user'); // Limpiar de localStorage
-    googleLogout();
+    localStorage.removeItem('user'); // Eliminar del almacenamiento
+    googleLogout(); // Desconectar de Google si es necesario
   };
 
   return (
@@ -51,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth debe usarse dentro de un AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };

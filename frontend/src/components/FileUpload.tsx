@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from './Auth/AuthProvider';
 
 const FileUpload: React.FC = () => {
@@ -7,6 +7,14 @@ const FileUpload: React.FC = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Verificar si el usuario está presente
+  useEffect(() => {
+    if (!user) {
+      setError('No tienes permisos para subir archivos. Inicia sesión para continuar.');
+    } else {
+      setError(null); // Limpiar el error si el usuario está presente
+    }
+  }, [user]);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedFile(event.target.files ? event.target.files[0] : null);
   };

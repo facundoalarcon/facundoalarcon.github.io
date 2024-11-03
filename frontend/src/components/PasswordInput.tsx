@@ -14,7 +14,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, onPasswordChang
       type="password"
       value={password}
       onChange={onPasswordChange}
-      placeholder="Contraseña del PDF (opcional)"
+      placeholder="Clave (opcional)"
     />
       <div style={{ marginTop: '10px' }}>
         <button type="button" onClick={handleBack} style={{ marginRight: '10px' }}>

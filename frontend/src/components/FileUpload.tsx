@@ -1,22 +1,37 @@
+// src/components/FileUpload.tsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './Auth/AuthProvider';
+import FileSelector from './FileSelector';
+import PasswordInput from './PasswordInput';
 
 const FileUpload: React.FC = () => {
   const { user } = useAuth();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [password, setPassword] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [step, setStep] = useState(1);
+  const [isCompleted, setIsCompleted] = useState(false);
 
-  // Verificar si el usuario está presente
   useEffect(() => {
     if (!user) {
       setError('No tienes permisos para subir archivos. Inicia sesión para continuar.');
     } else {
-      setError(null); // Limpiar el error si el usuario está presente
+      setError(null);
     }
   }, [user]);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedFile(event.target.files ? event.target.files[0] : null);
+
+  const handleFileChange = (file: File | null) => {
+    setSelectedFile(file);
+    if (file) {
+      setStep(2); // Cambia de paso si hay un archivo seleccionado
+    } else {
+      setStep(1); // Permite regresar si no hay archivo
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +47,8 @@ const FileUpload: React.FC = () => {
 
     const formData = new FormData();
     formData.append('file', selectedFile);
+    formData.append('password', password);
+    formData.append('email', user?.email || '');
 
     try {
       const uploadUrl = process.env.REACT_APP_FILE_URL_UPLOAD;
@@ -39,7 +56,6 @@ const FileUpload: React.FC = () => {
       if (!uploadUrl) {
         throw new Error("La URL de subida no está definida en las variables de entorno");
       }
-      console.log(uploadUrl) // Si hay error en subir archivos no esta cargando la url se puede poner acá
       const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
@@ -56,6 +72,8 @@ const FileUpload: React.FC = () => {
       a.download = `${selectedFile.name.replace('.pdf', '')}.csv`;
       a.click();
       window.URL.revokeObjectURL(url);
+
+      setIsCompleted(true);
     } catch (error) {
       setError('Hubo un problema al subir el archivo');
     } finally {
@@ -63,16 +81,60 @@ const FileUpload: React.FC = () => {
     }
   };
 
+  const handleBack = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const handleNewUpload = () => {
+    setSelectedFile(null);
+    setPassword('');
+    setStep(1);
+    setIsCompleted(false);
+  };
+
   return (
     <div className="container">
       <h2>Subir y Convertir PDF a CSV</h2>
       {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input type="file" accept=".pdf" onChange={handleFileChange} />
-        <button type="submit" disabled={!selectedFile || isUploading}>
-          {isUploading ? 'Procesando...' : 'Subir y Procesar'}
-        </button>
-      </form>
+      {!isCompleted ? (
+        <form onSubmit={handleSubmit}>
+          {step === 1 && (
+            <div>
+              <FileSelector selectedFile={selectedFile} onFileChange={handleFileChange} />
+              <button 
+                type="button" 
+                onClick={() => setStep(2)} 
+                disabled={!selectedFile} // Habilitar solo si hay un archivo seleccionado
+                style={{ marginTop: '10px' }}
+              >
+                Siguiente
+              </button>
+            </div>
+          )}
+
+          {step === 2 && (
+            <PasswordInput password={password} onPasswordChange={handlePasswordChange} handleBack={handleBack} setStep={setStep} />
+          )}
+
+          {step === 3 && (
+            <div>
+              <button type="button" onClick={handleBack} style={{ marginRight: '10px' }}>
+                Atrás
+              </button>
+              <button type="submit" disabled={!selectedFile || isUploading}>
+                {isUploading ? 'Procesando...' : 'Subir y Procesar'}
+              </button>
+            </div>
+          )}
+        </form>
+      ) : (
+        <div>
+          <p>Archivo procesado exitosamente. Puedes subir otro archivo si lo deseas.</p>
+          <button type="button" onClick={handleNewUpload}>
+            Subir otro archivo
+          </button>
+        </div>
+      )}
     </div>
   );
 };

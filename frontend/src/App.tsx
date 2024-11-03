@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from 'react';
 import { AuthProvider, useAuth } from './components/Auth/AuthProvider';
 import AuthComponent from './components/Auth/GoogleAuth';

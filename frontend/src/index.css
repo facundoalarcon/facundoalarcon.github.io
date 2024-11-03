@@ -45,12 +45,12 @@ button:hover {
 }
 
 input[type="password"] {
+  width: 200%; /* Ancho ajustado */
   margin: 15px 0;
-  padding: 12px 15px; /* Ajustar padding */
+  padding: 12px 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  width: 100%; /* Mantener ancho completo */
-  box-sizing: border-box; /* Asegura que el padding y el borde no afecten el ancho */
+  box-sizing: border-box;
 }
 
 input[type="password"]:focus {

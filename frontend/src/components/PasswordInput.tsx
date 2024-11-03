@@ -9,13 +9,13 @@ interface PasswordInputProps {
 
 const PasswordInput: React.FC<PasswordInputProps> = ({ password, onPasswordChange, handleBack, setStep }) => {
   return (
-    <div>
-      <input
-        type="password"
-        value={password}
-        onChange={onPasswordChange}
-        placeholder="Contraseña del PDF (opcional)"
-      />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+    <input
+      type="password"
+      value={password}
+      onChange={onPasswordChange}
+      placeholder="Contraseña del PDF (opcional)"
+    />
       <div style={{ marginTop: '10px' }}>
         <button type="button" onClick={handleBack} style={{ marginRight: '10px' }}>
           Atrás

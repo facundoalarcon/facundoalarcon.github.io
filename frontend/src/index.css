@@ -18,7 +18,7 @@ body {
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 0px; /* Aumentar padding */
+  padding: 50px; /* Aumentar padding */
   width: 600px; /* Ajustar el ancho del contenedor */
   text-align: center;
 }

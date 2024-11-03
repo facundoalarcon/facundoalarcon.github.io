@@ -1,4 +1,3 @@
-// src/components/Auth/GoogleAuth.tsx
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from './AuthProvider';

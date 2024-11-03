@@ -90,12 +90,12 @@ const FileUpload: React.FC = () => {
     setPassword('');
     setStep(1);
     setIsCompleted(false);
+    setError(null); // Resetear el mensaje de error al iniciar una nueva subida
   };
 
   return (
     <div className="container">
       <h2>Subir y Convertir PDF a CSV</h2>
-      {error && <p className="error-message">{error}</p>}
       {!isCompleted ? (
         <form onSubmit={handleSubmit}>
           {step === 1 && (
@@ -118,12 +118,24 @@ const FileUpload: React.FC = () => {
 
           {step === 3 && (
             <div>
-              <button type="button" onClick={handleBack} style={{ marginRight: '10px' }}>
-                Atrás
-              </button>
-              <button type="submit" disabled={!selectedFile || isUploading}>
-                {isUploading ? 'Procesando...' : 'Subir y Procesar'}
-              </button>
+              {/* Mostrar solo el botón de "Procesando..." si está subiendo, o "Subir y Procesar" si no lo está */}
+              {isUploading ? (
+                <button type="button" disabled>
+                  Procesando...
+                </button>
+              ) : (
+                <>
+                  <button type="button" onClick={handleBack} style={{ marginRight: '10px' }}>
+                      Atrás
+                    </button>
+                  
+                  <button type="submit">
+                    Subir y Procesar
+                  </button>
+                </>
+              )}
+              {/* Mostrar el mensaje de error solo en el último paso */}
+              {error && <p className="error-message">{error}</p>}
             </div>
           )}
         </form>
